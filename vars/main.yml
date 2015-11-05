@@ -1,0 +1,5 @@
+---
+# vars file for bitbucket
+
+bitbucket_catalina: /usr/share/bitbucket
+bitbucket_home: /var/lib/bitbucket
