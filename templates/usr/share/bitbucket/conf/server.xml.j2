@@ -8,7 +8,7 @@
         <Resource name="UserDatabase" auth="Container" type="org.apache.catalina.UserDatabase" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" pathname="conf/tomcat-users.xml"/>
     </GlobalNamingResources>
     <Service name="Catalina">
-        <Connector port="7990" protocol="HTTP/1.1" connectionTimeout="20000" useBodyEncodingForURI="true" redirectPort="8443" compression="on" compressableMimeType="text/html,text/xml,text/plain,text/css,application/json,application/javascript,application/x-javascript"{% if bitbucket_proxy_name and bitbucket_schema in ["http", "https"] %} proxyName="{{ bitbucket_proxy_name }}"{% if bitbucket_schema == "http" %} schema="http" proxyPort="80"{% elif bitbucket_schema == "https" %} schema="https" proxyPort="443" secure="true"{% endif %}{% endif %}/>
+        <Connector port="7990" protocol="HTTP/1.1" connectionTimeout="20000" useBodyEncodingForURI="true" redirectPort="8443" compression="on" compressableMimeType="text/html,text/xml,text/plain,text/css,application/json,application/javascript,application/x-javascript"{% if bitbucket_proxy_name and bitbucket_scheme in ["http", "https"] %} proxyName="{{ bitbucket_proxy_name }}"{% if bitbucket_scheme == "http" %} scheme="http" proxyPort="80"{% elif bitbucket_scheme == "https" %} scheme="https" proxyPort="443" secure="true"{% endif %}{% endif %}/>
         <Engine name="Catalina" defaultHost="localhost">
             <Realm className="org.apache.catalina.realm.LockOutRealm">
                 <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
