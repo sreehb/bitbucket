@@ -10,15 +10,15 @@
     shell=/bin/bash
   tags: bitbucket
 
-- name: prepare directory
+- name: prepare files
   file:
-    path={{ item }}
-    owner={{ bitbucket_user }}
-    group={{ bitbucket_user }}
-    state=directory
-    mode=0755
+    path={{ item.path }}
+    owner={{ item.owner }}
+    group={{ item.group }}
+    mode={{ item.mode }}
+    state={{ item.state }}
   with_items:
-    - "{{ bitbucket_catalina }}"
+    - { path: "{{ bitbucket_catalina }}", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0755', state: 'directory' }
   tags: bitbucket
 
 - name: download package
@@ -36,24 +36,15 @@
 
 - name: copy templates
   template:
-    src="{{ item }}.j2"
-    dest="/{{ item }}"
-    owner={{ bitbucket_user }}
-    group={{ bitbucket_user }}
-    mode=0644
+    src="{{ item.template }}.j2"
+    dest="/{{ item.template }}"
+    owner={{ item.owner }}
+    group={{ item.group }}
+    mode={{ item.mode }}
   with_items:
-    - etc/init.d/bitbucket
-    - usr/share/bitbucket/bin/setenv.sh
-    - usr/share/bitbucket/conf/server.xml
-  tags: bitbucket
-
-- name: prepare service script
-  file:
-    path=/etc/init.d/bitbucket
-    owner=root
-    group=root
-    state=file
-    mode=0755
+    - { template: 'etc/init.d/bitbucket', owner: 'root', group: 'root', mode: '0755' }
+    - { template: 'usr/share/bitbucket/bin/setenv.sh', owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0644' }
+    - { template: 'usr/share/bitbucket/conf/server.xml', owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0644' }
   tags: bitbucket
 
 - name: enable service
