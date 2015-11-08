@@ -8,6 +8,7 @@
     home={{ bitbucket_home }}
     system=yes
     shell=/bin/bash
+  notify: restart bitbucket
   tags: bitbucket
 
 - name: prepare files
@@ -19,6 +20,7 @@
     state={{ item.state }}
   with_items:
     - { path: "{{ bitbucket_catalina }}", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0755', state: 'directory' }
+  notify: restart bitbucket
   tags: bitbucket
 
 - name: download package
@@ -26,12 +28,14 @@
     url={{ bitbucket_url }}
     dest={{ bitbucket_archive }}
     sha256sum={{ bitbucket_sha256 }}
+  notify: restart bitbucket
   tags: bitbucket
 
 - name: unarchive package
   shell: tar zxvf {{ bitbucket_archive }} -C {{ bitbucket_catalina }} --strip-components=1; chown -Rf {{ bitbucket_user }}:{{ bitbucket_user }} {{ bitbucket_catalina }}
   args:
     creates: "{{ bitbucket_catalina }}/bin/start-bitbucket.sh"
+  notify: restart bitbucket
   tags: bitbucket
 
 - name: copy templates
@@ -45,6 +49,7 @@
     - { template: 'etc/init.d/bitbucket', owner: 'root', group: 'root', mode: '0755' }
     - { template: 'usr/share/bitbucket/bin/setenv.sh', owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0644' }
     - { template: 'usr/share/bitbucket/conf/server.xml', owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0644' }
+  notify: restart bitbucket
   tags: bitbucket
 
 - name: enable service
