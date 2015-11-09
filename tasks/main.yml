@@ -1,6 +1,25 @@
 ---
 # tasks file for bitbucket
 
+- name: stop service if upgrade
+  service: name=bitbucket state=stopped
+  when: bitbucket_upgrade == true
+  notify: restart bitbucket
+  tags: bitbucket
+
+- name: remove legacy binary if upgrade
+  file:
+    path={{ item.path }}
+    owner={{ item.owner }}
+    group={{ item.group }}
+    mode={{ item.mode }}
+    state={{ item.state }}
+  with_items:
+    - { path: "{{ bitbucket_catalina }}", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0755', state: 'absent' }
+  when: bitbucket_upgrade == true
+  notify: restart bitbucket
+  tags: bitbucket
+
 - name: create system user
   user:
     name={{ bitbucket_user }}
