@@ -2,6 +2,8 @@
 # defaults file for bitbucket
 
 bitbucket_archive: /tmp/atlassian-bitbucket-4.1.0.tar.gz
+bitbucket_catalina: /usr/share/bitbucket
+bitbucket_home: /var/lib/bitbucket
 bitbucket_pass: ahle4Boo
 bitbucket_proxy_name:
 bitbucket_scheme:
