@@ -59,15 +59,15 @@
 
 - name: copy templates
   template:
-    src="{{ item.template }}.j2"
-    dest="/{{ item.template }}"
+    src={{ item.src }}
+    dest={{ item.dest }}
     owner={{ item.owner }}
     group={{ item.group }}
     mode={{ item.mode }}
   with_items:
-    - { template: 'etc/init.d/bitbucket', owner: 'root', group: 'root', mode: '0755' }
-    - { template: 'usr/share/bitbucket/bin/setenv.sh', owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0644' }
-    - { template: 'usr/share/bitbucket/conf/server.xml', owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0644' }
+    - { src: 'etc/init.d/bitbucket.j2', dest: "/etc/init.d/bitbucket", owner: 'root', group: 'root', mode: '0755' }
+    - { src: 'usr/share/bitbucket/bin/setenv.sh.j2', dest: "/{{ bitbucket_catalina }}/bin/setenv.sh", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0644' }
+    - { src: 'usr/share/bitbucket/conf/server.xml.j2', dest: "/{{ bitbucket_catalina }}/conf/server.xml", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0644' }
   notify: restart bitbucket
   tags: bitbucket
 
