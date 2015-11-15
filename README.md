@@ -127,7 +127,7 @@ Example Playbook
     - hosts: servers
       roles:
         - { role: hswong3i.java }
-        - { role: hswong3i.bitbucket, bitbucket_user: 'bitbucket', bitbucket_pass: 'yav0nooR', bitbucket_upgrade: 'false' }
+        - { role: hswong3i.bitbucket, bitbucket_user: 'bitbucket', bitbucket_pass: 'ahle4Boo', bitbucket_upgrade: 'false' }
 
 License
 -------
