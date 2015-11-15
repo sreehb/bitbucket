@@ -1,56 +1,139 @@
-BitBucket
-=========
+Ansible Role for BitBucket
+==========================
 
-[![Build
-Status](https://travis-ci.org/pantarei/ansible-role-bitbucket.svg?branch=master)](https://travis-ci.org/pantarei/ansible-role-bitbucket)
-[![GitHub
-tag](https://img.shields.io/github/tag/pantarei/ansible-role-bitbucket.svg)](https://github.com/pantarei/ansible-role-bitbucket)
-[![GitHub
-license](https://img.shields.io/github/license/pantarei/ansible-role-bitbucket.svg)](https://github.com/pantarei/ansible-role-bitbucket)
+[![Build Status](https://travis-ci.org/pantarei/ansible-role-bitbucket.svg?branch=master)](https://travis-ci.org/pantarei/ansible-role-bitbucket)
+[![GitHub tag](https://img.shields.io/github/tag/pantarei/ansible-role-bitbucket.svg)](https://github.com/pantarei/ansible-role-bitbucket)
+[![GitHub license](https://img.shields.io/github/license/pantarei/ansible-role-bitbucket.svg)](https://github.com/pantarei/ansible-role-bitbucket/blob/master/LICENSE)
+[![Ansible Role](https://img.shields.io/ansible/role/5985.svg)](https://galaxy.ansible.com/detail#/role/5985)
 
-Ansible Role for BitBucket Installation.
+Ansible Role for Atlassian BitBucket Installation.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role
-should be mentioned here. For instance, if the role uses the EC2 module,
-it may be a good idea to mention in this section that the boto package
-is required.
+This role require Ansible 1.9 or higher.
+
+This role was designed for Ubuntu Server 14.04 LTS.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here,
-including any variables that are in defaults/main.yml, vars/main.yml,
-and any variables that can/should be set via parameters to the role. Any
-variables that are read from other roles and/or the global scope (ie.
-hostvars, group vars, etc.) should be mentioned here as well.
+<table>
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">parameter</th>
+<th align="left">required</th>
+<th align="left">default</th>
+<th align="left">choices</th>
+<th align="left">comments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">bitbucket_archive</td>
+<td align="left">yes</td>
+<td align="left">/tmp/atlassian-bitbucket-4.1.0.tar.gz</td>
+<td align="left"></td>
+<td align="left">Download archive filename for cache during (re)install.</td>
+</tr>
+<tr class="even">
+<td align="left">bitbucket_catalina</td>
+<td align="left">yes</td>
+<td align="left">/usr/share/bitbucket</td>
+<td align="left"></td>
+<td align="left">Location for the BitBucket installation directory.</td>
+</tr>
+<tr class="odd">
+<td align="left">bitbucket_home</td>
+<td align="left">yes</td>
+<td align="left">/var/lib/bitbucket</td>
+<td align="left"></td>
+<td align="left">Location for the BitBucket home directory.</td>
+</tr>
+<tr class="even">
+<td align="left">bitbucket_pass</td>
+<td align="left">yes</td>
+<td align="left">ahle4Boo</td>
+<td align="left"></td>
+<td align="left">Password for BitBucket system user.</td>
+</tr>
+<tr class="odd">
+<td align="left">bitbucket_proxy_name</td>
+<td align="left">no</td>
+<td align="left"><code>null</code></td>
+<td align="left"></td>
+<td align="left">Pass value as <code>proxyName</code> to <a href="https://github.com/pantarei/ansible-role-bitbucket/blob/master/templates/usr/share/bitbucket/conf/server.xml.j2">template</a>.</td>
+</tr>
+<tr class="even">
+<td align="left">bitbucket_scheme</td>
+<td align="left">no</td>
+<td align="left"><code>null</code></td>
+<td align="left"><ul>
+<li><code>null</code></li>
+<li>http</li>
+<li>https</li>
+</ul></td>
+<td align="left">Install BitBucket in standalone mode if <code>null</code>, or integrating with Apache using HTTP if <code>http</code>, or integrating with Apache using HTTPS if <code>https</code>.</td>
+</tr>
+<tr class="odd">
+<td align="left">bitbucket_sha256</td>
+<td align="left">yes</td>
+<td align="left">0b1e41ab64c25d446d1cda54392abb9120c4b92413c1d79f6642869cbdcd5a46</td>
+<td align="left"></td>
+<td align="left">Download archive sha256 checksum for cache during (re)install.</td>
+</tr>
+<tr class="even">
+<td align="left">bitbucket_upgrade</td>
+<td align="left">no</td>
+<td align="left"><code>false</code></td>
+<td align="left"><ul>
+<li><code>true</code></li>
+<li><code>false</code></li>
+</ul></td>
+<td align="left">If <code>true</code>, trigger upgrade by stop existing BitBucket service, purge existing BitBucket installation direcoty before normal tasks.</td>
+</tr>
+<tr class="odd">
+<td align="left">bitbucket_url</td>
+<td align="left">yes</td>
+<td align="left">https://downloads.atlassian.com/software/stash/downloads/atlassian-bitbucket-4.1.0.tar.gz</td>
+<td align="left"></td>
+<td align="left">URL for download archive.</td>
+</tr>
+<tr class="even">
+<td align="left">bitbucket_user</td>
+<td align="left">yes</td>
+<td align="left">bitbucket</td>
+<td align="left"></td>
+<td align="left">Username for BitBucket system user.</td>
+</tr>
+</tbody>
+</table>
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details
-in regards to parameters that may need to be set for other roles, or
-variables that are used from other roles.
+-   [hswong3i.java](https://galaxy.ansible.com/detail#/role/5971)
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with
-variables passed in as parameters) is always nice for users too:
-
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+        - { role: hswong3i.java }
+        - { role: hswong3i.bitbucket, bitbucket_user: 'bitbucket', bitbucket_pass: 'yav0nooR', bitbucket_upgrade: 'false' }
 
 License
 -------
 
--   Code released under
-    [MIT](https://github.com/hswong3i/ansible-role-bitbucket/blob/master/LICENSE)
--   Docs released under [CC BY
-    4.0](http://creativecommons.org/licenses/by/4.0/)
+-   Code released under [MIT](https://github.com/hswong3i/ansible-role-bitbucket/blob/master/LICENSE)
+-   Docs released under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
 
 Author Information
 ------------------
