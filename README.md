@@ -51,11 +51,39 @@ Role Variables
 <td align="left">Location for the BitBucket installation directory.</td>
 </tr>
 <tr class="odd">
+<td align="left">bitbucket_connector_port</td>
+<td align="left">yes</td>
+<td align="left">7990</td>
+<td align="left"></td>
+<td align="left">BitBucket Apache Tomcat connector port.</td>
+</tr>
+<tr class="even">
 <td align="left">bitbucket_home</td>
 <td align="left">yes</td>
 <td align="left">/var/lib/bitbucket</td>
 <td align="left"></td>
 <td align="left">Location for the BitBucket home directory.</td>
+</tr>
+<tr class="odd">
+<td align="left">bitbucket_jvm_maximum_memory</td>
+<td align="left">yes</td>
+<td align="left">1024m</td>
+<td align="left"></td>
+<td align="left">BitBucket JVM maximum memory usage.</td>
+</tr>
+<tr class="even">
+<td align="left">bitbucket_jvm_minimum_memory</td>
+<td align="left">yes</td>
+<td align="left">512m</td>
+<td align="left"></td>
+<td align="left">BitBucket JVM minimum memory usage.</td>
+</tr>
+<tr class="odd">
+<td align="left">bitbucket_jvm_support_recommended_args</td>
+<td align="left">no</td>
+<td align="left">-Datlassian.plugins.enable.wait=300</td>
+<td align="left"></td>
+<td align="left">Atlassian Support recommended JVM arguments.</td>
 </tr>
 <tr class="even">
 <td align="left">bitbucket_pass</td>
@@ -83,13 +111,20 @@ Role Variables
 <td align="left">Install BitBucket in standalone mode if <code>null</code>, or integrating with Apache using HTTP if <code>http</code>, or integrating with Apache using HTTPS if <code>https</code>.</td>
 </tr>
 <tr class="odd">
+<td align="left">bitbucket_server_port</td>
+<td align="left">yes</td>
+<td align="left">8006</td>
+<td align="left"></td>
+<td align="left">BitBucket Apache Tomcat server port.</td>
+</tr>
+<tr class="even">
 <td align="left">bitbucket_sha256</td>
 <td align="left">yes</td>
 <td align="left">0b1e41ab64c25d446d1cda54392abb9120c4b92413c1d79f6642869cbdcd5a46</td>
 <td align="left"></td>
 <td align="left">Download archive sha256 checksum for cache during (re)install.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">bitbucket_upgrade</td>
 <td align="left">no</td>
 <td align="left"><code>false</code></td>
@@ -99,14 +134,14 @@ Role Variables
 </ul></td>
 <td align="left">If <code>true</code>, trigger upgrade by stop existing BitBucket service, purge existing BitBucket installation direcoty before normal tasks.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">bitbucket_url</td>
 <td align="left">yes</td>
 <td align="left">https://downloads.atlassian.com/software/stash/downloads/atlassian-bitbucket-4.1.0.tar.gz</td>
 <td align="left"></td>
 <td align="left">URL for download archive.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">bitbucket_user</td>
 <td align="left">yes</td>
 <td align="left">bitbucket</td>
