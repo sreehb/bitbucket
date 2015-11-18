@@ -3,6 +3,7 @@
 
 bitbucket_archive: /tmp/atlassian-bitbucket-4.1.0.tar.gz
 bitbucket_catalina: /usr/share/bitbucket
+bitbucket_connector_port: 7990
 bitbucket_home: /var/lib/bitbucket
 bitbucket_jvm_maximum_memory: 1024m
 bitbucket_jvm_minimum_memory: 512m
@@ -10,6 +11,7 @@ bitbucket_jvm_support_recommended_args: -Datlassian.plugins.enable.wait=300
 bitbucket_pass: ahle4Boo
 bitbucket_proxy_name:
 bitbucket_scheme:
+bitbucket_server_port: 8006
 bitbucket_sha256: 0b1e41ab64c25d446d1cda54392abb9120c4b92413c1d79f6642869cbdcd5a46
 bitbucket_upgrade: false
 bitbucket_url: https://downloads.atlassian.com/software/stash/downloads/atlassian-bitbucket-4.1.0.tar.gz
