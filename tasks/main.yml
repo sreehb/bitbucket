@@ -1,5 +1,5 @@
 ---
-# tasks file for bitbucket
+# tasks file for hswong3i.bitbucket
 
 - name: stop service if upgrade
   service: name=bitbucket state=stopped
