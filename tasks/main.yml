@@ -5,7 +5,7 @@
   service: name=bitbucket state=stopped
   when: bitbucket_upgrade == true
   notify: restart bitbucket
-  tags: bitbucket
+  tags: hswong3i.bitbucket
 
 - name: remove legacy binary if upgrade
   file:
@@ -18,7 +18,7 @@
     - { path: "{{ bitbucket_catalina }}", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0755', state: 'absent' }
   when: bitbucket_upgrade == true
   notify: restart bitbucket
-  tags: bitbucket
+  tags: hswong3i.bitbucket
 
 - name: create system user
   user:
@@ -28,7 +28,7 @@
     system=yes
     shell=/bin/bash
   notify: restart bitbucket
-  tags: bitbucket
+  tags: hswong3i.bitbucket
 
 - name: prepare files
   file:
@@ -40,7 +40,7 @@
   with_items:
     - { path: "{{ bitbucket_catalina }}", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0755', state: 'directory' }
   notify: restart bitbucket
-  tags: bitbucket
+  tags: hswong3i.bitbucket
 
 - name: download package
   get_url:
@@ -48,14 +48,14 @@
     dest={{ bitbucket_archive }}
     sha256sum={{ bitbucket_sha256 }}
   notify: restart bitbucket
-  tags: bitbucket
+  tags: hswong3i.bitbucket
 
 - name: unarchive package
   shell: tar zxvf {{ bitbucket_archive }} -C {{ bitbucket_catalina }} --strip-components=1; chown -Rf {{ bitbucket_user }}:{{ bitbucket_user }} {{ bitbucket_catalina }}
   args:
     creates: "{{ bitbucket_catalina }}/bin/start-bitbucket.sh"
   notify: restart bitbucket
-  tags: bitbucket
+  tags: hswong3i.bitbucket
 
 - name: copy templates
   template:
@@ -69,9 +69,9 @@
     - { src: 'usr/share/bitbucket/bin/setenv.sh.j2', dest: "{{ bitbucket_catalina }}/bin/setenv.sh", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0644' }
     - { src: 'usr/share/bitbucket/conf/server.xml.j2', dest: "{{ bitbucket_catalina }}/conf/server.xml", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0644' }
   notify: restart bitbucket
-  tags: bitbucket
+  tags: hswong3i.bitbucket
 
 - name: enable service
   service: name=bitbucket enabled=yes
   notify: restart bitbucket
-  tags: bitbucket
+  tags: hswong3i.bitbucket
