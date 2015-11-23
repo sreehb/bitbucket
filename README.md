@@ -2,9 +2,9 @@ Ansible Role for BitBucket
 ==========================
 
 [![Build Status](https://travis-ci.org/pantarei/ansible-role-bitbucket.svg?branch=master)](https://travis-ci.org/pantarei/ansible-role-bitbucket)
-[![GitHub tag](https://img.shields.io/github/tag/pantarei/ansible-role-bitbucket.svg)](https://github.com/pantarei/ansible-role-bitbucket)
-[![GitHub license](https://img.shields.io/github/license/pantarei/ansible-role-bitbucket.svg)](https://github.com/pantarei/ansible-role-bitbucket/blob/master/LICENSE)
-[![Ansible Role](https://img.shields.io/ansible/role/5985.svg)](https://galaxy.ansible.com/detail#/role/5985)
+ [![GitHub tag](https://img.shields.io/github/tag/pantarei/ansible-role-bitbucket.svg)](https://github.com/pantarei/ansible-role-bitbucket)
+ [![GitHub license](https://img.shields.io/github/license/pantarei/ansible-role-bitbucket.svg)](https://github.com/pantarei/ansible-role-bitbucket/blob/master/LICENSE)
+ [![Ansible Role](https://img.shields.io/ansible/role/5985.svg)](https://galaxy.ansible.com/detail#/role/5985)
 
 Ansible Role for Atlassian BitBucket Installation.
 
@@ -161,7 +161,6 @@ Example Playbook
 
     - hosts: servers
       roles:
-        - { role: hswong3i.java }
         - { role: hswong3i.bitbucket, bitbucket_user: 'bitbucket', bitbucket_pass: 'ahle4Boo', bitbucket_upgrade: 'false' }
 
 License
