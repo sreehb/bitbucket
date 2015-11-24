@@ -125,6 +125,13 @@ Role Variables
 <td align="left">Download archive sha256 checksum for cache during (re)install.</td>
 </tr>
 <tr class="odd">
+<td align="left">bitbucket_ssh_port</td>
+<td align="left">yes</td>
+<td align="left">7990</td>
+<td align="left"></td>
+<td align="left">BitBucket SSH access port.</td>
+</tr>
+<tr class="odd">
 <td align="left">bitbucket_upgrade</td>
 <td align="left">no</td>
 <td align="left"><code>false</code></td>
