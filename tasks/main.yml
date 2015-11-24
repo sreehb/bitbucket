@@ -84,6 +84,5 @@
   with_items:
     - "{{ bitbucket_connector_port }}"
     - "{{ bitbucket_server_port }}"
-    - "{{ bitbucket_ssh_port }}"
   notify: restart bitbucket
   tags: hswong3i.bitbucket
