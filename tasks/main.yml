@@ -75,3 +75,14 @@
   service: name=bitbucket enabled=yes
   notify: restart bitbucket
   tags: hswong3i.bitbucket
+
+- name: enable incomming connection
+  ufw:
+    to_port={{ item }}
+    proto=tcp
+    rule=allow
+  with_items:
+    - "{{ bitbucket_connector_port }}"
+    - "{{ bitbucket_server_port }}"
+  notify: restart bitbucket
+  tags: hswong3i.bitbucket
