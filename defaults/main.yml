@@ -1,7 +1,7 @@
 ---
 # defaults file for hswong3i.bitbucket
 
-bitbucket_archive: /tmp/atlassian-bitbucket-4.1.0.tar.gz
+bitbucket_archive: /tmp/atlassian-bitbucket-4.1.3.tar.gz
 bitbucket_catalina: /usr/share/bitbucket
 bitbucket_connector_port: 7990
 bitbucket_home: /var/lib/bitbucket
@@ -12,7 +12,7 @@ bitbucket_pass: ahle4Boo
 bitbucket_proxy_name:
 bitbucket_scheme:
 bitbucket_server_port: 8006
-bitbucket_sha256: 0b1e41ab64c25d446d1cda54392abb9120c4b92413c1d79f6642869cbdcd5a46
+bitbucket_sha256: 2cdbab5394a3d82a854f33806d12b40f909ad172ef95064e9f0fce786fc65307
 bitbucket_upgrade: false
-bitbucket_url: https://downloads.atlassian.com/software/stash/downloads/atlassian-bitbucket-4.1.0.tar.gz
+bitbucket_url: https://downloads.atlassian.com/software/stash/downloads/atlassian-bitbucket-4.1.3.tar.gz
 bitbucket_user: bitbucket
