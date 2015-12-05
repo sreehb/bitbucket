@@ -20,12 +20,20 @@
   notify: restart bitbucket
   tags: hswong3i.bitbucket
 
-- name: create system user
+- name: apt-get install
+  apt:
+    name="{{ item }}"
+    state=latest
+  with_items:
+    - ufw
+  notify: restart bitbucket
+  tags: hswong3i.bitbucket
+
+- name: create user
   user:
     name={{ bitbucket_user }}
     password={{ bitbucket_pass }}
     home={{ bitbucket_home }}
-    system=yes
     shell=/bin/bash
   notify: restart bitbucket
   tags: hswong3i.bitbucket
