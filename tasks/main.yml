@@ -32,7 +32,7 @@
 - name: create user
   user:
     name={{ bitbucket_user }}
-    password={{ bitbucket_pass }}
+    password={{ bitbucket_pass | password_hash('sha512') }}
     home={{ bitbucket_home }}
     shell=/bin/bash
   notify: restart bitbucket
