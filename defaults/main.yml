@@ -9,8 +9,8 @@ bitbucket_jvm_maximum_memory: 1024m
 bitbucket_jvm_minimum_memory: 512m
 bitbucket_jvm_support_recommended_args: -Datlassian.plugins.enable.wait=300
 bitbucket_pass: ahle4Boo
-bitbucket_proxy_name:
-bitbucket_scheme:
+bitbucket_proxy_name: ~
+bitbucket_scheme: ~
 bitbucket_server_port: 8006
 bitbucket_sha256: 2cdbab5394a3d82a854f33806d12b40f909ad172ef95064e9f0fce786fc65307
 bitbucket_upgrade: false
