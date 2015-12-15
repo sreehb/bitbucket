@@ -58,48 +58,55 @@ Role Variables
 <td align="left">BitBucket Apache Tomcat connector port.</td>
 </tr>
 <tr class="even">
+<td align="left">bitbucket_hash_salt</td>
+<td align="left">yes</td>
+<td align="left"><a href="https://github.com/pantarei/ansible-role-bitbucket/blob/master/defaults/main.yml">defaults/main.yml</a></td>
+<td align="left"></td>
+<td align="left">Specific password hash salt for sha512.</td>
+</tr>
+<tr class="odd">
 <td align="left">bitbucket_home</td>
 <td align="left">yes</td>
 <td align="left">/var/lib/bitbucket</td>
 <td align="left"></td>
 <td align="left">Location for the BitBucket home directory.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">bitbucket_jvm_maximum_memory</td>
 <td align="left">yes</td>
 <td align="left">1024m</td>
 <td align="left"></td>
 <td align="left">BitBucket JVM maximum memory usage.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">bitbucket_jvm_minimum_memory</td>
 <td align="left">yes</td>
 <td align="left">512m</td>
 <td align="left"></td>
 <td align="left">BitBucket JVM minimum memory usage.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">bitbucket_jvm_support_recommended_args</td>
 <td align="left">no</td>
 <td align="left"><a href="https://github.com/pantarei/ansible-role-bitbucket/blob/master/defaults/main.yml">defaults/main.yml</a></td>
 <td align="left"></td>
 <td align="left">Atlassian Support recommended JVM arguments.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">bitbucket_pass</td>
 <td align="left">yes</td>
 <td align="left">ahle4Boo</td>
 <td align="left"></td>
 <td align="left">Password for BitBucket system user.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">bitbucket_proxy_name</td>
 <td align="left">no</td>
 <td align="left"><code>null</code></td>
 <td align="left"></td>
 <td align="left">Pass value as <code>proxyName</code> to <a href="https://github.com/pantarei/ansible-role-bitbucket/blob/master/templates/usr/share/bitbucket/conf/server.xml.j2">template</a>.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">bitbucket_scheme</td>
 <td align="left">no</td>
 <td align="left"><code>null</code></td>
@@ -110,21 +117,21 @@ Role Variables
 </ul></td>
 <td align="left">Install BitBucket in standalone mode if <code>null</code>, or integrating with Apache using HTTP if <code>http</code>, or integrating with Apache using HTTPS if <code>https</code>.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">bitbucket_server_port</td>
 <td align="left">yes</td>
 <td align="left">8006</td>
 <td align="left"></td>
 <td align="left">BitBucket Apache Tomcat server port.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">bitbucket_sha256</td>
 <td align="left">yes</td>
 <td align="left"><a href="https://github.com/pantarei/ansible-role-bitbucket/blob/master/defaults/main.yml">defaults/main.yml</a></td>
 <td align="left"></td>
 <td align="left">Download archive sha256 checksum for cache during (re)install.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">bitbucket_upgrade</td>
 <td align="left">no</td>
 <td align="left"><code>false</code></td>
@@ -134,14 +141,14 @@ Role Variables
 </ul></td>
 <td align="left">If <code>true</code>, trigger upgrade by stop existing BitBucket service, purge existing BitBucket installation direcoty before normal tasks.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">bitbucket_url</td>
 <td align="left">yes</td>
 <td align="left"><a href="https://github.com/pantarei/ansible-role-bitbucket/blob/master/defaults/main.yml">defaults/main.yml</a></td>
 <td align="left"></td>
 <td align="left">URL for download archive.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">bitbucket_user</td>
 <td align="left">yes</td>
 <td align="left">bitbucket</td>
