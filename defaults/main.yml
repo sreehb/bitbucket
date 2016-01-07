@@ -4,6 +4,7 @@
 bitbucket_archive: /tmp/atlassian-bitbucket-4.2.0.tar.gz
 bitbucket_catalina: /usr/share/bitbucket
 bitbucket_connector_port: 7990
+bitbucket_context_path: ~
 bitbucket_hash_salt: 7a19759dc774f9accbe51540e80e155f31290517417fd6960a27f891877dd272
 bitbucket_home: /var/lib/bitbucket
 bitbucket_jvm_maximum_memory: 1024m
