@@ -14,7 +14,7 @@
                 <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
             </Realm>
             <Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true" xmlValidation="false" xmlNamespaceAware="false">
-                <Context docBase="${catalina.home}/atlassian-bitbucket" path="" reloadable="false" useHttpOnly="true"/>
+                <Context docBase="${catalina.home}/atlassian-bitbucket" path="{{ bitbucket_context_path }}" reloadable="false" useHttpOnly="true"/>
             </Host>
         </Engine>
     </Service>
