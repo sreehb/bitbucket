@@ -1,25 +1,6 @@
 ---
 # tasks file for hswong3i.bitbucket
 
-- name: stop service if upgrade
-  service: name=bitbucket state=stopped
-  when: bitbucket_upgrade == true
-  notify: restart bitbucket
-  tags: hswong3i.bitbucket
-
-- name: remove legacy binary if upgrade
-  file:
-    path={{ item.path }}
-    owner={{ item.owner }}
-    group={{ item.group }}
-    mode={{ item.mode }}
-    state={{ item.state }}
-  with_items:
-    - { path: "{{ bitbucket_catalina }}", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0755', state: 'absent' }
-  when: bitbucket_upgrade == true
-  notify: restart bitbucket
-  tags: hswong3i.bitbucket
-
 - name: apt-get install
   apt:
     name={{ item.name }}
@@ -53,13 +34,12 @@
 - name: download package
   get_url:
     url={{ bitbucket_url }}
-    dest={{ bitbucket_archive }}
-    sha256sum={{ bitbucket_sha256 }}
-  notify: restart bitbucket
+    dest="/tmp/{{ bitbucket_archive }}"
+    checksum={{ bitbucket_checksum }}
   tags: hswong3i.bitbucket
 
 - name: unarchive package
-  shell: tar zxvf {{ bitbucket_archive }} -C {{ bitbucket_catalina }} --strip-components=1; chown -Rf {{ bitbucket_user }}:{{ bitbucket_user }} {{ bitbucket_catalina }}
+  shell: tar zxvf /tmp/{{ bitbucket_archive }} -C {{ bitbucket_catalina }} --strip-components=1; chown -Rf {{ bitbucket_user }}:{{ bitbucket_user }} {{ bitbucket_catalina }}
   args:
     creates: "{{ bitbucket_catalina }}/bin/start-bitbucket.sh"
   notify: restart bitbucket
