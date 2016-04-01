@@ -1,9 +1,9 @@
 ---
 # defaults file for hswong3i.bitbucket
 
-bitbucket_archive: atlassian-bitbucket-4.4.1.tar.gz
+bitbucket_archive: atlassian-bitbucket-4.4.2.tar.gz
 bitbucket_catalina: /usr/share/bitbucket
-bitbucket_checksum: "sha256:91866f21cf13a9eb9f490b85b7e878d5283038f4824c66e97bdd92867c363c22"
+bitbucket_checksum: "sha256:050e31d88da4cfd6715834fc5a48ec8977f461f0fac7899c602a75e251952be4"
 bitbucket_connector_port: 7990
 bitbucket_context_path: ~
 bitbucket_hash_salt: BeiVawa2ongiegip
