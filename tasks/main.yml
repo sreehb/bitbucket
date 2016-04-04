@@ -3,8 +3,8 @@
 
 - name: apt-get install
   apt:
-    name={{ item.name }}
-    state={{ item.state }}
+    name="{{ item.name }}"
+    state="{{ item.state }}"
   with_items:
     - { state: 'latest', name: 'ufw' }
   notify: restart bitbucket
@@ -12,20 +12,20 @@
 
 - name: create user
   user:
-    name={{ bitbucket_user }}
-    password={{ bitbucket_pass | password_hash('sha512', bitbucket_hash_salt) }}
-    home={{ bitbucket_home }}
+    name="{{ bitbucket_user }}"
+    password="{{ bitbucket_pass | password_hash('sha512', bitbucket_hash_salt) }}"
+    home="{{ bitbucket_home }}"
     shell=/bin/bash
   notify: restart bitbucket
   tags: hswong3i.bitbucket
 
 - name: prepare files
   file:
-    path={{ item.path }}
-    owner={{ item.owner }}
-    group={{ item.group }}
-    mode={{ item.mode }}
-    state={{ item.state }}
+    path="{{ item.path }}"
+    owner="{{ item.owner }}"
+    group="{{ item.group }}"
+    mode="{{ item.mode }}"
+    state="{{ item.state }}"
   with_items:
     - { path: "{{ bitbucket_catalina }}", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0755', state: 'directory' }
   notify: restart bitbucket
@@ -33,9 +33,9 @@
 
 - name: download package
   get_url:
-    url={{ bitbucket_url }}
+    url="{{ bitbucket_url }}"
     dest="/tmp/{{ bitbucket_archive }}"
-    checksum={{ bitbucket_checksum }}
+    checksum="{{ bitbucket_checksum }}"
   tags: hswong3i.bitbucket
 
 - name: unarchive package
@@ -47,11 +47,11 @@
 
 - name: copy templates
   template:
-    src={{ item.src }}
-    dest={{ item.dest }}
-    owner={{ item.owner }}
-    group={{ item.group }}
-    mode={{ item.mode }}
+    src="{{ item.src }}"
+    dest="{{ item.dest }}"
+    owner="{{ item.owner }}"
+    group="{{ item.group }}"
+    mode="{{ item.mode }}"
   with_items:
     - { src: 'etc/init.d/bitbucket.j2', dest: "/etc/init.d/bitbucket", owner: 'root', group: 'root', mode: '0755' }
     - { src: 'usr/share/bitbucket/bin/setenv.sh.j2', dest: "{{ bitbucket_catalina }}/bin/setenv.sh", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: '0644' }
@@ -66,9 +66,9 @@
 
 - name: enable incomming connection
   ufw:
-    to_port={{ item.to_port }}
-    proto={{ item.proto }}
-    rule={{ item.rule }}
+    to_port="{{ item.to_port }}"
+    proto="{{ item.proto }}"
+    rule="{{ item.rule }}"
   with_items:
     - { to_port: "{{ bitbucket_connector_port }}", proto: 'tcp', rule: 'allow' }
     - { to_port: "{{ bitbucket_server_port }}", proto: 'tcp', rule: 'allow' }
