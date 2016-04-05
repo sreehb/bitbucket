@@ -2,4 +2,6 @@
 # handlers file for hswong3i.bitbucket
 
 - name: restart bitbucket
-  service: name=bitbucket state=restarted
+  service:
+    name: "bitbucket"
+    state: "restarted"

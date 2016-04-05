@@ -72,8 +72,8 @@
 
 - name: enable service
   service:
-    name: bitbucket
-    enabled: yes
+    name: "bitbucket"
+    enabled: "yes"
   notify: restart bitbucket
   tags: hswong3i.bitbucket
 
