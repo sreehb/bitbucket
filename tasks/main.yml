@@ -10,11 +10,20 @@
   notify: restart bitbucket
   tags: hswong3i.bitbucket
 
+- name: create group
+  group:
+    name: "{{ bitbucket_user }}"
+    gid: "{{ bitbucket_gid | default(None) or omit }}"
+  notify: restart bitbucket
+  tags: hswong3i.bitbucket
+
 - name: create user
   user:
     name: "{{ bitbucket_user }}"
     password: "{{ bitbucket_pass | password_hash('sha512', bitbucket_hash_salt) }}"
     home: "{{ bitbucket_home }}"
+    group: "{{ bitbucket_user }}"
+    uid: "{{ bitbucket_uid | default(None) or omit }}"
     shell: "/bin/bash"
   notify: restart bitbucket
   tags: hswong3i.bitbucket
