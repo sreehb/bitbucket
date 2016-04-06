@@ -72,11 +72,11 @@ Role Variables
 <td>Pass value as <code>path</code> to <a href="https://github.com/pantarei/ansible-role-bitbucket/blob/master/templates/usr/share/bitbucket/conf/server.xml.j2">template</a>.</td>
 </tr>
 <tr class="even">
-<td>bitbucket_uid</td>
+<td>bitbucket_gid</td>
 <td>no</td>
 <td></td>
 <td></td>
-<td>Specifying the UID for shared storage. NOTE: This value should only be set once before deploying and then never changed.</td>
+<td>Specifying the GID for shared storage. NOTE: This value should only be set once before deploying and then never changed.</td>
 </tr>
 <tr class="odd">
 <td>bitbucket_hash_salt</td>
@@ -146,11 +146,11 @@ Role Variables
 <td>BitBucket Apache Tomcat server port.</td>
 </tr>
 <tr class="even">
-<td>bitbucket_gid</td>
+<td>bitbucket_uid</td>
 <td>no</td>
 <td></td>
 <td></td>
-<td>Specifying the GID for shared storage. NOTE: This value should only be set once before deploying and then never changed.</td>
+<td>Specifying the UID for shared storage. NOTE: This value should only be set once before deploying and then never changed.</td>
 </tr>
 <tr class="odd">
 <td>bitbucket_url</td>
