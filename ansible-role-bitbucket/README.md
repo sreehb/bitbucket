@@ -174,23 +174,3 @@ Dependencies
 
 No additional role dependencies.
 
-Example Playbook
-----------------
-
-    - hosts: servers
-      roles:
-        - { role: hswong3i.bitbucket }
-
-License
--------
-
--   Code released under [MIT](https://github.com/pantarei/ansible-role-bitbucket/blob/master/LICENSE)
--   Docs released under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
-
-Author Information
-------------------
-
--   Wong Hoi Sing Edison
-    -   <a href="https://twitter.com/hswong3i" class="uri" class="uri">https://twitter.com/hswong3i</a>
-    -   <a href="https://github.com/hswong3i" class="uri" class="uri">https://github.com/hswong3i</a>
-
