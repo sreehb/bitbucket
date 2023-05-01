@@ -9,11 +9,15 @@
     - { state: "latest", name: "ufw" }
     - { state: "latest", name: "openjdk-8-jre-headless"}
 
+- name: Run Shell command to identify the Java home
+  shell: 'update-alternatives --query java | grep "Value: " | grep -o "/.*/jre"'
+  register: java_home
+
 - name: Setting Java Home path for Java 8
   blockinfile:
         path: /etc/profile
         block: |
-          export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre/"
+          export JAVA_HOME={{ java_home.stdout }}
           export PATH=$JAVA_HOME/bin:$PATH
 - pause:
     seconds: 5
@@ -74,7 +78,7 @@
   lineinfile:
     path: /usr/share/bitbucket/bin/set-jre-home.sh
     regex: '^# JRE_HOME='
-    line: JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre/
+    line: JRE_HOME={{ java_home.stdout }}
 
 - name: Reload the OS Services
   command: systemctl daemon-reload
