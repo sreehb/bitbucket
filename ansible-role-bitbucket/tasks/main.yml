@@ -1,7 +1,7 @@
 ---
 # tasks file for hswong3i.bitbucket
 
-- name: apt-get install ( Firewall )
+- name: apt-get install ( Firewall & Java 8)
   apt:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
@@ -9,12 +9,21 @@
     - { state: "latest", name: "ufw" }
     - { state: "latest", name: "openjdk-8-jre-headless"}
 
-- name: create group
+- name: Setting Java Home path for Java 8
+  blockinfile:
+        path: /etc/profile
+        block: |
+          export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre/"
+          export PATH=$JAVA_HOME/bin:$PATH
+- pause:
+    seconds: 5
+
+- name: create BitBucket group
   group:
     name: "{{ bitbucket_user }}"
     gid: "{{ bitbucket_gid | default(None) or omit }}"
 
-- name: create user
+- name: create BitBucket user
   user:
     name: "{{ bitbucket_user }}"
     password: "{{ bitbucket_pass | password_hash('sha512', bitbucket_hash_salt) }}"
@@ -23,7 +32,7 @@
     uid: "{{ bitbucket_uid | default(None) or omit }}"
     shell: "/bin/bash"
 
-- name: prepare files
+- name: Creating temporay "directory" to download BitBucket binary
   file:
     path: "{{ item.path }}"
     owner: "{{ item.owner }}"
@@ -33,20 +42,19 @@
   with_items:
     - { path: "{{ bitbucket_catalina }}", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: "0755", state: "directory" }
 
-- name: download package
+- name: download BitBucket package
   get_url:
     url: "{{ bitbucket_url }}"
     dest: "/tmp/{{ bitbucket_archive }}"
-    checksum: "{{ bitbucket_checksum }}"
 
-- name: unarchive package
+- name: unarchive BitBucket package under /tmp
   shell: |
     tar zxvf /tmp/{{ bitbucket_archive }} -C {{ bitbucket_catalina }} --strip-components=1
     chown -Rf {{ bitbucket_user }}:{{ bitbucket_user }} {{ bitbucket_catalina }}
   args:
     creates: "{{ bitbucket_catalina }}/bin/start-bitbucket.sh"
 
-- name: copy templates
+- name: copy BitBucket required files using templates
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -55,17 +63,29 @@
     mode: "{{ item.mode }}"
   with_items:
     - { src: "etc/init.d/bitbucket.j2", dest: "/etc/init.d/bitbucket", owner: "root", group: "root", mode: "0755" }
-    - { src: "usr/share/bitbucket/bin/setenv.sh.j2", dest: "{{ bitbucket_catalina }}/bin/setenv.sh", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: "0644" }
-    - { src: "usr/share/bitbucket/conf/server.xml.j2", dest: "{{ bitbucket_catalina }}/conf/server.xml", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: "0644" }
+    - { src: "usr/share/bitbucket/bin/set-bitbucket-home.sh.j2", dest: "{{ bitbucket_catalina }}/bin/set-bitbucket-home.sh", owner: "{{ bitbucket_user }}", group: "{{ bitbucket_user }}", mode: "0755" }
+    - { src: "etc/systemd/system/bitbucket.service.j2", dest: "/etc/systemd/system/bitbucket.service", owner: "root", group: "root", mode: "0755"}
   notify: restart bitbucket
 
-- name: enable service
+- name: Set BitBucket Home path
+  command: sh /usr/share/bitbucket/bin/set-bitbucket-home.sh
+
+- name: Setting Java Home path
+  lineinfile:
+    path: /usr/share/bitbucket/bin/set-jre-home.sh
+    regex: '^# JRE_HOME='
+    line: JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre/
+
+- name: Reload the OS Services
+  command: systemctl daemon-reload
+
+- name: enable and start BitBucket service
   service:
     name: "bitbucket"
     enabled: "yes"
   notify: restart bitbucket
 
-- name: enable incomming connection
+- name: enable ports for incomming connection 
   ufw:
     to_port: "{{ item.to_port }}"
     proto: "{{ item.proto }}"
